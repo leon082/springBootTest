@@ -7,9 +7,10 @@ package com.exaple.springBootMySql.springBootMySql.controller;
 
 import com.exaple.springBootMySql.springBootMySql.model.Student;
 import com.exaple.springBootMySql.springBootMySql.repository.StudentRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,12 @@ public class StudentController {
     
    
     @PostMapping
-    public Student retrieveAllStudents(@RequestBody Student student) {
+    public Student saveOrUpdateStudent(@RequestBody Student student) {
         return studentRepository.save(student);
+    }
+    
+    @DeleteMapping(value ="/{id}")
+    public void deleteStudent(@PathVariable(value = "id") Long id) {
+         studentRepository.deleteById(id);
     }
 }
